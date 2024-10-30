@@ -44,7 +44,9 @@ export default function Datavis() {
         });
 
         setTValues((prevT) => {
-          const newT = [...prevT, data.t].slice(-10);
+          let newDate = new Date(data.t * 1000);
+          newDate = newDate.toTimeString();
+          const newT = [...prevT, newDate].slice(-10);
           return newT;
         });
       } catch (error) {
@@ -69,7 +71,6 @@ export default function Datavis() {
       },
     ],
   };
-  console.log(tValues, cValues);
 
   const options = {
     scales: {

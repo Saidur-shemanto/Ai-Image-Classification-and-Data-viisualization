@@ -29,7 +29,10 @@ export default function Homepage() {
             </p>
           </div>
         </a>
-        <div className="group flex flex-col justify-center items-center border-2 w-1/2 border-purple-800 rounded-2xl  hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] delay-100 transition ease-in-out cursor-pointer">
+        <a
+          href="/Data-visualization"
+          className="group flex flex-col justify-center items-center border-2 w-1/2 border-purple-800 rounded-2xl  hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] delay-100 transition ease-in-out cursor-pointer"
+        >
           <div className="h-96 flex items-center justify-center">
             <IoBarChartOutline className="text-7xl" />
           </div>
@@ -45,7 +48,7 @@ export default function Homepage() {
               Go to page
             </p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   );

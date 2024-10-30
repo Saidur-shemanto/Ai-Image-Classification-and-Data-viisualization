@@ -42,7 +42,7 @@ export default function Classification() {
     );
   }
   return (
-    <div className="flex flex-col m-auto items-center justify-center border-2 border-purple-600  rounded-2xl h-auto min-h-[60vh] p-4 w-2/3">
+    <div className="flex flex-col m-auto items-center justify-center border-2 border-purple-600  rounded-2xl h-auto min-h-[60vh] p-4 w-11/12 lg:w-2/3">
       <div>
         <IoCloudUploadOutline
           className="text-5xl cursor-pointer"
@@ -59,7 +59,12 @@ export default function Classification() {
       </div>
       {imageUrl ? (
         <div className="flex flex-col items-center justify-center gap-4">
-          <img src={imageUrl} alt="" ref={imageref} className="w-48 h-48" />
+          <img
+            src={imageUrl}
+            alt=""
+            ref={imageref}
+            className="w-auto min-w-48 h-48"
+          />
           <button className="btn" onClick={handleIdentification}>
             Identify Image
           </button>
@@ -69,19 +74,19 @@ export default function Classification() {
       )}
       {predictions.length > 0 && (
         <div className="w-full flex flex-col items-center  justify-center mt-4 gap-2">
-          <div className="relative w-2/6">
+          <div className="relative w-full lg:w-2/6">
             <progress
               className="progress progress-error w-full h-14 "
               value={predictions[0].probability * 100}
               max="100"
             ></progress>
-            <div className="absolute inset-0 flex items-center justify-center gap-4 text-white">
+            <div className="absolute  inset-0 flex items-center justify-center gap-4 text-white">
               {predictions[0].className}
 
               <p>{(predictions[0].probability * 100).toFixed(2)}% </p>
             </div>
           </div>
-          <div className="relative w-2/6">
+          <div className="relative w-full lg:w-2/6">
             <progress
               className="progress progress-error w-full h-14"
               value={predictions[1].probability * 100}
@@ -93,7 +98,7 @@ export default function Classification() {
               <p>{(predictions[1].probability * 100).toFixed(2)}% </p>
             </div>
           </div>
-          <div className="relative w-2/6">
+          <div className="relative w-full lg:w-2/6">
             <progress
               className="progress progress-error w-full h-14"
               value={predictions[2].probability * 100}
