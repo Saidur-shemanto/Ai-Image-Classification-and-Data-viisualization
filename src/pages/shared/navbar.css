@@ -1,0 +1,15 @@
+.navlist.active {
+  text-decoration: underline;
+  text-decoration-color: purple;
+  text-decoration-thickness: 3px;
+  text-underline-position: under;
+  background-color: #1d232a !important;
+}
+
+.navlist:hover {
+  text-decoration: underline;
+  text-decoration-color: purple;
+  text-decoration-thickness: 3px;
+  text-underline-position: under;
+  background-color: #1d232a !important;
+}

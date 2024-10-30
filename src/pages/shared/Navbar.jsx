@@ -1,14 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./navbar.css";
 
 export default function Navbar() {
   const navlist = (
     <>
       <li>
-        <NavLink to={"/classification"}>Image Classification</NavLink>
+        <NavLink to={"/classification"} className="navlist">
+          Image Classification
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/Data-visualization"}>Data Visualization</NavLink>
+        <NavLink to={"/Data-visualization"} className="navlist">
+          Data Visualization
+        </NavLink>
       </li>
     </>
   );
@@ -40,7 +45,7 @@ export default function Navbar() {
           </ul>
         </div>
         <a className="btn btn-ghost text-xl" href="/">
-          daisyUI
+          Dismage
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">

@@ -1,62 +1,134 @@
-import { Chart } from "chart.js";
 import React, { useEffect, useRef, useState } from "react";
-import * as d3 from "d3";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export default function Datavis() {
-  const [weatherData, setWeatherData] = useState([]);
-  const baseUrl = "https://api.nextbike.net/maps/nextbike-live.json";
+  const [quoteData, setquoteData] = useState([]);
+  const [cValues, setCValues] = useState([]);
+  const [tValues, setTValues] = useState([]);
   const apikey = import.meta.env.VITE_API_KEY;
+  const baseUrl = `https://finnhub.io/api/v1/quote?symbol=AAPL&token=${apikey}`;
+
   const svgRef = useRef();
-
   useEffect(() => {
-    fetch(baseUrl)
-      .then((res) => res.json())
-      .then((data) => console.log(data.countries.name));
-  }, []);
-  useEffect(() => {
-    // setting up svg
-    const w = 400;
-    const h = 200;
-    const svg = d3
-      .select(svgRef.current)
-      .attr("width", w)
-      .attr("height", h)
-      .style("overflow", "visible")
-      .style("background", "#c5f6fa");
+    const fetchData = async () => {
+      try {
+        const response = await fetch(baseUrl);
+        const data = await response.json();
+        setquoteData(data);
 
-    const xScale = d3
-      .scaleLinear()
-      .domain([0, weatherData.length - 1])
-      .range([0, w]);
-    const yScale = d3.scaleLinear().domain([0, h]).range([h, 0]);
+        setCValues((prevC) => {
+          const newC = [...prevC, data.c].slice(-10);
+          return newC;
+        });
 
-    const generateScaledLine = d3
-      .line()
-      .x((d, i) => xScale(i))
-      .y(yScale)
-      .curve(d3.curveCardinal);
+        setTValues((prevT) => {
+          const newT = [...prevT, data.t].slice(-10);
+          return newT;
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-    const xAxis = d3
-      .axisBottom(xScale)
-      .ticks(1 + weatherData.length)
-      .tickFormat((i) => i + 1);
-    const yAxis = d3.axisLeft(yScale).ticks(7);
-    // drawing the axes on the svg
-    svg.append("g").call(xAxis).attr("transform", `translate(0,${h})`);
-    svg.append("g").call(yAxis);
+    fetchData();
+  }, [baseUrl]);
+  console.log(quoteData);
+  const canvasData = {
+    datasets: [
+      {
+        label: "Home",
+        borderColor: "navy",
+        pointRadius: 0,
+        fill: true,
+        backgroundColor: "purple",
+        lineTension: 0.4,
+        data: cValues,
+        borderWidth: 1,
+      },
+    ],
+  };
+  console.log(tValues, cValues);
 
-    svg
-      .selectAll(".line")
-      .data([weatherData])
-      .join("path")
-      .attr("d", (d) => generateScaledLine(d))
-      .attr("fill", "none")
-      .attr("stroke", "black");
-  }, [weatherData]);
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        labels: tValues,
+        ticks: {
+          color: "white",
+          font: {
+            family: "Nunito",
+            size: 12,
+          },
+        },
+      },
+      y: {
+        grid: {
+          display: false,
+        },
+        border: {
+          display: false,
+        },
+        min: 0,
+        max: 80,
+        ticks: {
+          stepSize: 10,
+          color: "white",
+          font: {
+            family: "Nunito",
+            size: 12,
+          },
+        },
+      },
+    },
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: false,
+      },
+    },
+  };
+
+  const graphStyle = {
+    minHeight: "10rem",
+    maxWidth: "540px",
+    width: "100%",
+    border: "1px solid #C4C4C4",
+    borderRadius: "0.375rem",
+    padding: "0.5rem",
+  };
 
   return (
-    <div>
-      <svg ref={svgRef} style={{ margin: "100px", display: "block" }}></svg>
+    <div className="mt-10">
+      <Line id="home" options={options} data={canvasData} />
     </div>
   );
 }

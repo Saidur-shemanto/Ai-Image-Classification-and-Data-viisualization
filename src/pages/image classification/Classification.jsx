@@ -35,7 +35,7 @@ export default function Classification() {
   }, []);
   if (modelLoading) {
     return (
-      <div className="flex justify-center gap-2">
+      <div className="flex   justify-center gap-2">
         <p>model is loading</p>
         <span className="loading loading-dots loading-sm mt-2"></span>
       </div>
