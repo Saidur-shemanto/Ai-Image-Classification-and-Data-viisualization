@@ -8,6 +8,9 @@ Model: Mobilenet
 
 
 <h4>To Run this project-</h4>
+Clone the project <br/>
+Generate an api key from finnhub.io<br/>
+create a folder named .env.local and put the api key in VITE_API_KEY variable.<br/>
 run these commands
 
 ```bash 
