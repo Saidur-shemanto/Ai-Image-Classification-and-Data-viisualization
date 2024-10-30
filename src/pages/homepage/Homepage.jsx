@@ -21,8 +21,9 @@ export default function Homepage() {
             <h1 className="text-3xl font-bold">Image Classification</h1>
 
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-              reprehenderit?
+              In this section, an image classification model called Mobilenet
+              has been implemented which takes an image and returns the
+              classification as an output
             </p>
             <p className="border-purple-800 border-2 group-hover:bg-[#1D232A] delay-100 transition ease-in-out  max-w-28 rounded-xl py-2 text-center">
               Go to page
@@ -41,8 +42,8 @@ export default function Homepage() {
             <h1 className="text-3xl font-bold">Data Visualization</h1>
 
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-              reprehenderit?
+              This section shows live update update of stock price of apple and
+              the api was taken from finnhub.io
             </p>
             <p className="border-purple-800 border-2 group-hover:bg-[#1D232A] delay-100 transition ease-in-out  max-w-28 rounded-xl py-2 text-center">
               Go to page
